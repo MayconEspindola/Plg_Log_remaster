@@ -1,0 +1,20 @@
+{
+    "name": "maycon/plg_log_remaster",
+    "description": "Projeto logistica",
+    "type": "project",
+    "require": {
+        "mongodb/mongodb": "1.16"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Maycon\\PlgLogRemaster\\": "work/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maycon Espindola",
+            "email": "mycone10@gmail.com"
+        }
+    ]
+}

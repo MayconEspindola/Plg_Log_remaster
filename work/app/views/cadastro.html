@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJL LOG</title>
+    
+    <link rel="icon" type="image/x-icon" href="/images/codigo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/id/register.css">
+
+</head>
+<body>
+
+    <div class="page .container-sm">
+        <form method="POST" class="formCadastro" action="/controllers/registerUser.php">
+            <h1>Cadastro</h1>
+            <p>Digite os seus dados de acesso no campo abaixo.</p>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingName" placeholder="nome" name="nome" required>
+                <label for="floatingName">Nome:</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="senha" required>
+                <label for="floatingPassword">Senha:</label>
+            </div>
+            <input type="submit" value="Cadastrar" class="btn btn-danger" id="cadastro" />
+            <li>
+                <span class="text1">
+                    Já tem conta?
+                    <a href="login.php" class="text2">Login</a>
+                </span>
+            </li>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+	<script>
+		let inputs = document.getElementsByClassName('input-form');
+		for (let input of inputs) {
+			input.addEventListener("blur", function() {
+				if(input.value.trim() != ""){
+					input.classList.add("has-val");
+				} else {
+					input.classList.remove("has-val");
+				}
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,100&display=swap');
+
+:root {
+    --main-color: #047ff1;/* login barra links */
+    --link-color: #666666;
+    --text1: #999999;
+    --mouse: #696767;
+    --mouse2: blue;
+    --highligth-text: #0a0a0a;/*cor texto "login" */
+    --input-text: #555555;
+    --white-color: #FFFFFF;
+    --point-list: #CCCCCC;
+    --line-input: #D9D9D9;
+  }
+  
+  s
+  /*
+    Zerar estilos
+  */
+  
+  * {
+      margin: 0px; 
+      padding: 0px; 
+      box-sizing: border-box;
+  }
+  
+  body, html {
+      height: 100%;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  ul, li {
+      margin: 0px;
+      list-style-type: none;
+  }
+  
+  input, button {
+      outline: none !important;
+      border: none;
+  }
+  
+  button:hover {
+      cursor: pointer;
+  }
+  
+  /*
+    Utilitários
+  */
+  
+  .text1 {
+    text-decoration: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    color: var(--text1);
+    line-height: 1.5;
+  }
+  
+  .text2 {
+    text-decoration: none;  
+    display:inline-block;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    color: var(--main-color);
+    line-height: 1.5;
+  }
+  
+  .margin-bottom-35 {
+    margin-bottom: 35px;
+  }
+  
+  .margin-top-35 {
+    margin-top: 35px;
+  }
+  
+  .margin-bottom-8 {
+    margin-bottom: 8px;
+  }
+  
+  .margin-top-8 {
+    margin-top: 8px;
+  }
+  
+  .margin-left-50 {
+    margin-left: 50px;
+  }
+  
+  /*
+    Login
+  */
+  
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .container-login {
+    width: 100%;  
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: var(--white-color);  
+  }
+  
+  .wrap-login {
+    width: 370px;
+    margin-right: 50px;
+    background: var(--white-color);
+  }
+  
+  /*
+    Formulário
+  */
+  
+  .login-form {
+    width: 100%;
+  }
+  
+  .login-form-title {
+    display: block;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 39px;
+    color: var(--highligth-text);
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  /*
+    Input
+  */
+  
+  .wrap-input {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid var(--line-input);
+  }
+  
+  .input-form {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: var(--input-text);
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 52px;
+    background: transparent;
+    padding: 0 5px;
+  }
+  
+  .focus-input-form {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .focus-input-form::before {
+    border: 2px;
+    border-radius: 30px;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: all 0.4s;
+    background: var(--main-color);
+  }
+  
+  .focus-input-form::after {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: var(--text1);
+    line-height: 1.2;
+    content: attr(data-placeholder);
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    padding-left: 5px;
+    transition: all 0.4s;
+  }
+  
+  .input-form:focus + .focus-input-form::after {
+    top: -20px;
+    font-size: 15px;
+  }
+  
+  .input-form:focus + .focus-input-form::before {
+    width: 100%;
+  }
+  
+  .has-val.input-form + .focus-input-form::after {
+    top: -20px;
+    font-size: 15px;
+  }
+  
+  .has-val.input-form + .focus-input-form::before {
+    width: 100%;
+  }
+  
+  /*
+    Botão
+  */
+  
+  .container-login-form-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .login-form-btn {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: var(--white-color);
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    background-color: var(--mouse);
+    border-radius: 5px;
+    transition: all 0.4s;
+  }
+  
+  .login-form-btn:hover  {
+    background-color: var(--mouse2);
+  }
+  
+  /*
+    Links - Login utils
+  */
+  
+  a {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--link-color);
+      margin: 0px;
+      transition: all 0.4s;
+  }
+  
+  a:focus {
+      outline: none !important;
+  }
+  
+  a:hover {
+      text-decoration: none;
+    color: var(--highligth-text);
+  }
+  /*
+  Container da página
+*/
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--white-color);
+}
+
+/*
+  Formulário de Login
+*/
+.formLogin {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: var(--white-color);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.formLogin h1 {
+  font-size: 28px;
+  color: var(--highligth-text);
+  text-align: center;
+}
+
+.formLogin p {
+  font-size: 14px;
+  color: var(--text1);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  font-size: 18px;
+  color: var(--input-text);
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  height: 52px;
+  background: transparent;
+  padding: 0 5px;
+}
+
+.form-floating {
+  margin-bottom: 20px;
+}
+
+.form-floating label {
+  font-size: 16px;
+  color: var(--input-text);
+}
+
+.form-floating input {
+  border: none;
+  border-bottom: 2px solid var(--line-input);
+}
+
+.form-floating input:focus {
+  border-bottom: 2px solid var(--main-color);
+}
+
+.btn {
+  font-size: 16px;
+  color: var(--white-color);
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  background-color: var(--mouse);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--mouse2);
+}
+
+/* Estilos para o link "Cadastre-se" */
+a {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:focus {
+  outline: none !important;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--highligth-text);
+}
