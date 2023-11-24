@@ -8,7 +8,7 @@ const navigation = {
         window.location.href = "/views/transition/traffic.php";
     },
     cadCliente: () => {
-        window.location.href = "/views/register/cliente.php";
+        window.location.href = "/views/register/registerClient.php";
     },
     cadProduto: () => {
         window.location.href = "/views/register/registerItem.php";
