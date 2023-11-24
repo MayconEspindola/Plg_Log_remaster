@@ -42,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = $collection->insertOne($document);
 
         if ($result->getInsertedCount() > 0) {
-            redirecionar('/views/home/home.php');
+            redirecionar('/views/home.php');
         } else {
             echo "<script>alert('Não foi possível cadastrar este cliente');</script>";
-            redirecionar('/views/home/home.php');
+            redirecionar('/views/home.php');
         }
     }
 } else {

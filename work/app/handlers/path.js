@@ -17,7 +17,7 @@ const navigation = {
         window.location.href = "/views/home.php";
     },
     gerenciamentoDados: () => {
-        window.location.href = "/views/exibicao.php";
+        window.location.href = "/views/tables/display.php";
     },
 };
 

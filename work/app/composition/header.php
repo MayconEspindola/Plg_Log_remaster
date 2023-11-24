@@ -32,7 +32,7 @@ if (!isset($_SESSION["username"])) {
     <link rel="stylesheet" type="text/css" href="/assets/style/cad.produto.css">
     <script src="/handlers/path.js"></script>
     <script src="/assets/js/controller-soma-sub.js"></script>
-    <script src="/assets/js/verificador_inatividade.js"></script>
+    <script src="/handlers/InactivityCheckerjs"></script>
     <script>
         function showInputFields() {
             var form = document.getElementById("reportForm");
@@ -71,7 +71,7 @@ if (!isset($_SESSION["username"])) {
                 </form>
             </li>
             <li class="nav-item">
-                <form action="/inc/logout.php" method="post">
+                <form action="/controllers/logout.php" method="post">
                     <button type="submit" class="btn btn-link">
                         <i class="bi bi-box-arrow-right"></i> Sair
                     </button>

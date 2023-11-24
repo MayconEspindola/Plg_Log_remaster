@@ -48,7 +48,7 @@ if ($verificarNotaFiscal) {
     $result = $collection->insertOne($document);
 
     if ($result->getInsertedCount() > 0) {
-        redirecionar('/views/home/home.php');
+        redirecionar('/views/home.php');
     } else {
         echo "<script>alert('Não foi possível cadastrar este produto');</script>";
         redirecionar('/views/register/registerItem.php');
