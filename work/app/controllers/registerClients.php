@@ -7,7 +7,7 @@ require_once __DIR__ . '/../config/EnvironmentSettings.php';
 if (isset($_SESSION["username"])) {
     $nomeUsuario = $_SESSION["username"];
 } else {
-    redirecionar('/src/login.php');
+    redirecionar('/views/login.php');
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($verificarNome) {
         echo "<script>alert('Não foi possível cadastrar este cliente devido a um nome já existente');</script>";
-        redirecionar('/src/cadastro/cliente.php');
+        redirecionar('/views/register/registerClient.php');
     } else {
         $document = [
             'autor' => $nomeUsuario,
@@ -42,14 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = $collection->insertOne($document);
 
         if ($result->getInsertedCount() > 0) {
-            redirecionar('/src/home.php');
+            redirecionar('/views/home/home.php');
         } else {
             echo "<script>alert('Não foi possível cadastrar este cliente');</script>";
-            redirecionar('/src/home.php');
+            redirecionar('/views/home/home.php');
         }
     }
 } else {
-    redirecionar('/src/cadastro/cliente.php');
+    redirecionar('/views/register/registerClient.php');
 }
 
 function redirecionar($url) {
