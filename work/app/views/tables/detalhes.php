@@ -1,27 +1,19 @@
 <?php
-
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/EnvironmentSettings.php';
 
 include_once("../../composition/header.php");
 
-$envSettings = new \app\config\EnvironmentSettings();
-$env = $envSettings->obterConfiguracoes();
+$notaFiscal = isset($_GET['notaFiscal']) ? $_GET['notaFiscal'] : null;
 
-$database = \app\config\Database::getConnection();
-
-if ($database !== null) {
-    exibirProdutos($database);
-} else {
-    echo "Erro ao conectar ao MongoDB.";
-}
-
-function exibirProdutos($database) {
+if ($notaFiscal) {
     $collectionName = $GLOBALS['env']['DATABASE']['collectionA1'];
+    $filter = ['notaFiscal' => $notaFiscal];
 
-    $result = \app\config\Database::getResultFromQuery($collectionName);
+    $result = \app\config\Database::getResultFromQuery($collectionName, $filter);
 
     if ($result !== null) {
+        echo "<h2>Detalhes da Nota Fiscal: $notaFiscal</h2>";
         echo "<table class='table table-dark table-striped'>
                 <thead>
                     <tr>
@@ -37,7 +29,6 @@ function exibirProdutos($database) {
                         <th scope='col'>Comprimento</th>
                         <th scope='col'>Peso</th>
                         <th scope='col'>Nota Fiscal</th>
-                        <th scope='col'>Ações</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -56,39 +47,13 @@ function exibirProdutos($database) {
             echo "<td>" . $row['comprimento'] . "</td>";
             echo "<td>" . $row['peso'] . "</td>";
             echo "<td>" . $row['notaFiscal'] . "</td>";
-            echo "<td>
-                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"" . $row['notaFiscal'] . "\")'>Detalhes</button>
-                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"" . $row['notaFiscal'] . "\")'>Editar</button>
-                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"" . $row['notaFiscal'] . "\")'>Excluir</button>
-                  </td>";
             echo "</tr>";
         }
         echo "</tbody></table>";
     } else {
-        echo "Erro na consulta de Produtos.";
+        echo "Erro na consulta de Produtos com Nota Fiscal: $notaFiscal";
     }
+} else {
+    echo "Nota Fiscal não fornecida.";
 }
-
 ?>
-<script>
-    function exibirDetalhes(notaFiscal) {
-        window.location.href = 'detalhes.php?notaFiscal=' + notaFiscal;
-    }
-
-    function editarRegistro(notaFiscal) {
-        // Lógica para editar o registro com base na nota fiscal
-        // Você pode redirecionar para uma página de edição ou exibir um formulário modal
-        alert('Editar Registro com Nota Fiscal: ' + notaFiscal);
-    }
-
-    function excluirRegistro(notaFiscal) {
-        // Lógica para excluir o registro com base na nota fiscal
-        // Você pode confirmar a exclusão com um modal
-        if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
-            // Chame sua função PHP para excluir o registro aqui
-            // Pode ser uma requisição AJAX ou uma nova requisição à página PHP
-            alert('Registro excluído com sucesso.');
-        }
-    }
-</script>
-
