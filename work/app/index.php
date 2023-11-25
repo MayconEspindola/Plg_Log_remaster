@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles/index.css">
-        <link rel="icon" type="image/x-icon" href="/images/Logo_MEIM_1.png">
+        <link rel="icon" type="image/x-icon" href="/images/PLG-log.png">
 
-        <title>Vanguard</title>
+        <title>PLG_LOG</title>
     </head>
     <body>
         <div class="banner">
@@ -14,12 +14,12 @@
                 <source src="/images/videos/introducao.mp4" type="video/mp4">
             </video>
             <div class="navbar">
-                <img class="logo" src="/images/PLG-log.png" alt="Logo PJL" width="10">
+                <img class="logo" src="/images/PLG-log.png" alt="Logo PLG" width="10">
                 <ul>
                     <li><a href="/views/cadastro.html">Criar conta</a></li>
                 
                 </ul>
-            </div>
+            </div>Código
             <div class="content">
                 <h1>PROJETE SEU FUTURO</h1>
                 <div>
