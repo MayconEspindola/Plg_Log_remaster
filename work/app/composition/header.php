@@ -16,7 +16,7 @@ if (!isset($_SESSION["username"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PJL LOG</title>
+    <title>PLG LOG</title>
     <link rel="icon" type="image/x-icon" href="/images/PLG-log.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css"
