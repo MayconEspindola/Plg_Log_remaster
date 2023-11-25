@@ -1,5 +1,5 @@
 <?php
-    include_once("../../composition/header.php"); 
+    include_once("../composition/header.php"); 
 ?>
 
 <article>
