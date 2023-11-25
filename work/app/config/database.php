@@ -2,10 +2,11 @@
 
 namespace app\config;
 
+use MongoDB\Client;
+use MongoDB\Driver\Exception\Exception as MongoDBException;
+
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../config/EnvironmentSettings.php';
-
-use MongoDB\Client;
 
 class Database
 {
@@ -25,11 +26,11 @@ class Database
 
             $client = new Client($uri);
             return $client->selectDatabase($env['DATABASE']['database']);
-        } catch (\Exception $e) {
-            die("Erro ao conectar ao MongoDB: " . $e->getMessage());
+        } catch (MongoDBException $e) {
+            throw new \RuntimeException("Erro ao conectar ao MongoDB: " . $e->getMessage());
         }
     }
-    
+
     public static function getResultFromQuery($collectionName, $filter = [])
     {
         $database = self::getConnection();
@@ -43,8 +44,8 @@ class Database
         try {
             $result = $collection->find($filter);
             return $result;
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            die("Erro na consulta: " . $e->getMessage());
+        } catch (MongoDBException $e) {
+            throw new \RuntimeException("Erro na consulta: " . $e->getMessage());
         }
     }
 
@@ -61,10 +62,8 @@ class Database
         try {
             $collection->insertOne($document);
             return true;
-        } catch (\MongoDB\Driver\Exception\BulkWriteException $e) {
-            die("Erro ao inserir documento: " . $e->getMessage());
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            die("Erro ao inserir documento: " . $e->getMessage());
+        } catch (MongoDBException $e) {
+            throw new \RuntimeException("Erro ao inserir documento: " . $e->getMessage());
         }
     }
 
@@ -81,8 +80,8 @@ class Database
         try {
             $collection->deleteOne($filter);
             return true;
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            die("Erro ao excluir documento: " . $e->getMessage());
+        } catch (MongoDBException $e) {
+            throw new \RuntimeException("Erro ao excluir documento: " . $e->getMessage());
         }
     }
 
@@ -99,8 +98,8 @@ class Database
         try {
             $collection->updateOne($filter, $update);
             return true;
-        } catch (\MongoDB\Driver\Exception\Exception $e) {
-            die("Erro ao atualizar documento: " . $e->getMessage());
+        } catch (MongoDBException $e) {
+            throw new \RuntimeException("Erro ao atualizar documento: " . $e->getMessage());
         }
     }
 }
