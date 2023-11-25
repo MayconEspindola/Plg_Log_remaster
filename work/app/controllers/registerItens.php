@@ -28,6 +28,7 @@ $collection = $database->selectCollection($collectionName);
 
 $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
 
+<<<<<<< HEAD
 if ($verificarNotaFiscal) {
     echo "<script>alert('Não foi possível cadastrar este produto devido a uma nota fiscal já existente');</script>";
     redirecionar('/views/register/registerItem.php');
@@ -46,6 +47,10 @@ if ($verificarNotaFiscal) {
         'peso' => floatval($peso),
         'notaFiscal' => $notaFiscal,
     ];
+=======
+    $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
+}
+>>>>>>> 725f0fb ( No ramo Plg_Log_remaster-Miler)
 
     $result = $collection->insertOne($document);
 
@@ -57,9 +62,19 @@ if ($verificarNotaFiscal) {
     }
 }
 
+
 function redirecionar($url) {
     echo "<script>window.location.href='$url';</script>";
     exit();
 }
+<<<<<<< HEAD
 ?>
 >>>>>>> 893fe27 (main)
+=======
+
+function converterParaPonto($valor) {
+    return str_replace(',', '.', $valor);
+
+}
+?>
+>>>>>>> 725f0fb ( No ramo Plg_Log_remaster-Miler)
