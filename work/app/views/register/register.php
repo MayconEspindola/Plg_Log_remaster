@@ -13,6 +13,10 @@
                 <img src="/images/pessoas.png" width="60" height="36" alt="Ícone Clientes">
                 Clientes
             </button>
+                <a href="../home.php">
+            <button class="btn btn-primary" type="submit">Voltar
+            </button>
+            
         </div>
     </section>
 </article>

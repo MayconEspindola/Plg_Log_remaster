@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $collection = $database->selectCollection($collectionName);
 
     $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
+}
 
     if ($verificarNotaFiscal) {
         echo "<script>alert('Não foi possível cadastrar este produto devido a uma nota fiscal já existente');</script>";
@@ -64,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+
 function redirecionar($url) {
     echo "<script>window.location.href='$url';</script>";
     exit();
@@ -71,5 +73,6 @@ function redirecionar($url) {
 
 function converterParaPonto($valor) {
     return str_replace(',', '.', $valor);
+
 }
 ?>
