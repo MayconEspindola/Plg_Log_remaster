@@ -25,6 +25,7 @@ function exibirProdutos($database) {
         echo "<table class='table table-dark table-striped'>
                 <thead>
                     <tr>
+                        <th scope='col'>Encarregado</th>
                         <th scope='col'>Código</th>
                         <th scope='col'>Modelo</th>
                         <th scope='col'>Descrição</th>
@@ -42,21 +43,22 @@ function exibirProdutos($database) {
 
         foreach ($result as $row) {
             echo "<tr>";
-            echo "<td>" . $row['$cod']. "</td>";
-            echo "<td>" . $row['$model'] . "</td>";
-            echo "<td>" . $row['$description'] . "</td>";
-            echo "<td>" . $row['$custo'] . "</td>";
-            echo "<td>" . $row['$lucro'] . "</td>";
-            echo "<td>" . $row['$preco'] . "</td>";
-            echo "<td>" . $row['$altura'] . "</td>";
-            echo "<td>" . $row['$largura'] . "</td>";
-            echo "<td>" . $row['$comprimento'] . "</td>";
-            echo "<td>" . $row['$peso'] . "</td>";
-            echo "<td>" . $row['$notaFiscal'] . "</td>";
+            echo "<td>" . $row['encarregado'] . "</td>";
+            echo "<td>" . $row['codigo'] . "</td>";
+            echo "<td>" . $row['modelo'] . "</td>";
+            echo "<td>" . $row['descricao'] . "</td>";
+            echo "<td>" . $row['custo'] . "</td>";
+            echo "<td>" . $row['lucro'] . "</td>";
+            echo "<td>" . $row['preco'] . "</td>";
+            echo "<td>" . $row['altura'] . "</td>";
+            echo "<td>" . $row['largura'] . "</td>";
+            echo "<td>" . $row['comprimento'] . "</td>";
+            echo "<td>" . $row['peso'] . "</td>";
+            echo "<td>" . $row['notaFiscal'] . "</td>";
             echo "</tr>";
         }
         echo "</tbody></table>";
-    }else {
+    } else {
         echo "Erro na consulta de Produtos.";
     }
 }
