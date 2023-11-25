@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/styles/index.css">
         <link rel="icon" type="image/x-icon" href="/images/PLG-log.png">
 
-        <title>PLG_LOG</title>
+        <title>PLG LOG</title>
     </head>
     <body>
         <div class="banner">
