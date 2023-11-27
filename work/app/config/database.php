@@ -7,7 +7,7 @@ use MongoDB\Driver\Exception\Exception as MongoDBException;
 use MongoDB\BSON\Regex;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../config/EnvironmentSettings.php';
+require_once 'EnvironmentSettings.php';
 
 class Database
 {

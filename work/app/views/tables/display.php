@@ -79,46 +79,11 @@ function exibirProdutos($database) {
     }
 
     function excluirRegistro(notaFiscal) {
-    if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
-        excluirRegistroNoBanco(notaFiscal);
-    }
-}
 
-async function excluirRegistroNoBanco(notaFiscal) {
-    try {
-        const response = await enviarRequisicao(notaFiscal);
-        if (response.status === 200) {
-            alert('Registro excluído com sucesso.');
-        } else {
-            alert('Erro ao excluir registro. Verifique o console para mais informações.');
-            console.error(response.responseText);
+        /*
+        if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
+            excluirRegistroNoBanco(notaFiscal);
         }
-    } catch (error) {
-        console.error('Erro na requisição:', error);
+        */
     }
-}
-
-function enviarRequisicao(notaFiscal) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/controllers/deleteInvoice.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        xhr.onload = function () {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                resolve(xhr);
-            } else {
-                reject(xhr);
-            }
-        };
-
-        xhr.onerror = function () {
-            reject(new Error('Erro na requisição.'));
-        };
-
-        const data = JSON.stringify({ notaFiscal: notaFiscal });
-        xhr.send(data);
-    });
-}
-
 </script>

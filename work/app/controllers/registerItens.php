@@ -30,12 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = \app\config\Database::getConnection();
     $collection = $database->selectCollection($collectionName);
 
+    // Verificar se a nota fiscal já existe
     $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
 
-    if ($verificarNotaFiscal) {
-        echo "<script>alert('Não foi possível cadastrar este produto devido a uma nota fiscal já existente');</script>";
-        redirecionar('/views/register/registerItem.php');
-    } else {
+    if (verificarCadastro($verificarNotaFiscal, $notaFiscal, $collection, $cod)) {
         $document = [
             'encarregado' => $nomeUsuario,
             'codigo' => (int) $cod,
@@ -54,17 +52,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'dataHoraInsercao' => $dataHoraInsercao,
         ];
 
-        $result = $collection->insertOne($document);
-
-        if ($result->getInsertedCount() > 0) {
-            redirecionar('/views/home.php');
-        } else {
-            echo "<script>alert('Não foi possível cadastrar este produto');</script>";
-            redirecionar('/views/register/registerItem.php');
-        }
+        cadastrarProduto($collection, $document);
+    } else {
+        echo "<script>alert('Não foi possível cadastrar este produto devido a um código já existente nesta nota fiscal');</script>";
+        redirecionar('/views/register/registerItem.php');
     }
 } else {
     echo "Método inválido";
+}
+
+function verificarCadastro($verificarNotaFiscal, $notaFiscal, $collection, $cod) {
+    if ($verificarNotaFiscal) {
+        // Verificar se algum código na mesma nota fiscal é igual ao código fornecido
+        $verificarCodigoNaNota = $collection->findOne(['notaFiscal' => $notaFiscal, 'codigo' => (int)$cod]);
+        return !$verificarCodigoNaNota;
+    }
+    return true;
+}
+
+function cadastrarProduto($collection, $document) {
+    $result = $collection->insertOne($document);
+
+    if ($result->getInsertedCount() > 0) {
+        redirecionar('/views/home.php');
+    } else {
+        echo "<script>alert('Não foi possível cadastrar este produto');</script>";
+        redirecionar('/views/register/registerItem.php');
+    }
 }
 
 function redirecionar($url) {
