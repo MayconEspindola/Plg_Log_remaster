@@ -1,8 +1,6 @@
 <?php
-
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/EnvironmentSettings.php';
-
 include_once("../../composition/header.php");
 
 $envSettings = new \app\config\EnvironmentSettings();
@@ -17,8 +15,9 @@ if ($database !== null) {
 }
 
 function exibirProdutos($database) {
-    $collectionName = $GLOBALS['env']['DATABASE']['collectionA1'];
+    global $env;
 
+    $collectionName = $env['DATABASE']['collectionA1'];
     $result = \app\config\Database::getResultFromQuery($collectionName);
 
     if ($result !== null) {
@@ -44,31 +43,31 @@ function exibirProdutos($database) {
 
         foreach ($result as $row) {
             echo "<tr>";
-            echo "<td>" . $row['encarregado'] . "</td>";
-            echo "<td>" . $row['codigo'] . "</td>";
-            echo "<td>" . $row['modelo'] . "</td>";
-            echo "<td>" . $row['descricao'] . "</td>";
-            echo "<td>" . $row['custo'] . "</td>";
-            echo "<td>" . $row['lucro'] . "</td>";
-            echo "<td>" . $row['preco'] . "</td>";
-            echo "<td>" . $row['altura'] . "</td>";
-            echo "<td>" . $row['largura'] . "</td>";
-            echo "<td>" . $row['comprimento'] . "</td>";
-            echo "<td>" . $row['peso'] . "</td>";
-            echo "<td>" . $row['notaFiscal'] . "</td>";
+            echo "<td>{$row['encarregado']}</td>";
+            echo "<td>{$row['codigo']}</td>";
+            echo "<td>{$row['modelo']}</td>";
+            echo "<td>{$row['descricao']}</td>";
+            echo "<td>{$row['custo']}</td>";
+            echo "<td>{$row['lucro']}</td>";
+            echo "<td>{$row['preco']}</td>";
+            echo "<td>{$row['altura']}</td>";
+            echo "<td>{$row['largura']}</td>";
+            echo "<td>{$row['comprimento']}</td>";
+            echo "<td>{$row['peso']}</td>";
+            echo "<td>{$row['notaFiscal']}</td>";
             echo "<td>
-                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"" . $row['notaFiscal'] . "\")'>Detalhes</button>
-                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"" . $row['notaFiscal'] . "\")'>Editar</button>
-                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"" . $row['notaFiscal'] . "\")'>Excluir</button>
+                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['notaFiscal']}\")'>Detalhes</button>
+                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['notaFiscal']}\")'>Editar</button>
+                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['notaFiscal']}\")'>Excluir</button>
                   </td>";
             echo "</tr>";
         }
+
         echo "</tbody></table>";
     } else {
         echo "Erro na consulta de Produtos.";
     }
 }
-
 ?>
 <script>
     function exibirDetalhes(notaFiscal) {
@@ -76,19 +75,50 @@ function exibirProdutos($database) {
     }
 
     function editarRegistro(notaFiscal) {
-        // Lógica para editar o registro com base na nota fiscal
-        // Você pode redirecionar para uma página de edição ou exibir um formulário modal
         alert('Editar Registro com Nota Fiscal: ' + notaFiscal);
     }
 
     function excluirRegistro(notaFiscal) {
-        // Lógica para excluir o registro com base na nota fiscal
-        // Você pode confirmar a exclusão com um modal
-        if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
-            // Chame sua função PHP para excluir o registro aqui
-            // Pode ser uma requisição AJAX ou uma nova requisição à página PHP
-            alert('Registro excluído com sucesso.');
-        }
+    if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
+        excluirRegistroNoBanco(notaFiscal);
     }
-</script>
+}
 
+async function excluirRegistroNoBanco(notaFiscal) {
+    try {
+        const response = await enviarRequisicao(notaFiscal);
+        if (response.status === 200) {
+            alert('Registro excluído com sucesso.');
+        } else {
+            alert('Erro ao excluir registro. Verifique o console para mais informações.');
+            console.error(response.responseText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+}
+
+function enviarRequisicao(notaFiscal) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/controllers/deleteInvoice.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                resolve(xhr);
+            } else {
+                reject(xhr);
+            }
+        };
+
+        xhr.onerror = function () {
+            reject(new Error('Erro na requisição.'));
+        };
+
+        const data = JSON.stringify({ notaFiscal: notaFiscal });
+        xhr.send(data);
+    });
+}
+
+</script>

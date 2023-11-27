@@ -1,19 +1,20 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/EnvironmentSettings.php';
-
 include_once("../../composition/header.php");
 
 $notaFiscal = isset($_GET['notaFiscal']) ? $_GET['notaFiscal'] : null;
 
 if ($notaFiscal) {
-    $collectionName = $GLOBALS['env']['DATABASE']['collectionA1'];
+    $envSettings = new \app\config\EnvironmentSettings();
+    $env = $envSettings->obterConfiguracoes();
+    
+    $collectionName = $env['DATABASE']['collectionA1'];
     $filter = ['notaFiscal' => $notaFiscal];
 
     $result = \app\config\Database::getResultFromQuery($collectionName, $filter);
 
     if ($result !== null) {
-        echo "<h2>Detalhes da Nota Fiscal: $notaFiscal</h2>";
         echo "<table class='table table-dark table-striped'>
                 <thead>
                     <tr>
@@ -35,18 +36,18 @@ if ($notaFiscal) {
 
         foreach ($result as $row) {
             echo "<tr>";
-            echo "<td>" . $row['encarregado'] . "</td>";
-            echo "<td>" . $row['codigo'] . "</td>";
-            echo "<td>" . $row['modelo'] . "</td>";
-            echo "<td>" . $row['descricao'] . "</td>";
-            echo "<td>" . $row['custo'] . "</td>";
-            echo "<td>" . $row['lucro'] . "</td>";
-            echo "<td>" . $row['preco'] . "</td>";
-            echo "<td>" . $row['altura'] . "</td>";
-            echo "<td>" . $row['largura'] . "</td>";
-            echo "<td>" . $row['comprimento'] . "</td>";
-            echo "<td>" . $row['peso'] . "</td>";
-            echo "<td>" . $row['notaFiscal'] . "</td>";
+            echo "<td>{$row['encarregado']}</td>";
+            echo "<td>{$row['codigo']}</td>";
+            echo "<td>{$row['modelo']}</td>";
+            echo "<td>{$row['descricao']}</td>";
+            echo "<td>{$row['custo']}</td>";
+            echo "<td>{$row['lucro']}</td>";
+            echo "<td>{$row['preco']}</td>";
+            echo "<td>{$row['altura']}</td>";
+            echo "<td>{$row['largura']}</td>";
+            echo "<td>{$row['comprimento']}</td>";
+            echo "<td>{$row['peso']}</td>";
+            echo "<td>{$row['notaFiscal']}</td>";
             echo "</tr>";
         }
         echo "</tbody></table>";

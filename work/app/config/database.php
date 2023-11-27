@@ -4,6 +4,7 @@ namespace app\config;
 
 use MongoDB\Client;
 use MongoDB\Driver\Exception\Exception as MongoDBException;
+use MongoDB\BSON\Regex;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../config/EnvironmentSettings.php';
@@ -70,20 +71,26 @@ class Database
     public static function deleteDocument($collectionName, $filter)
     {
         $database = self::getConnection();
-
+    
         if ($database === null) {
             return false;
         }
-
+    
         $collection = $database->selectCollection($collectionName);
-
+    
         try {
-            $collection->deleteOne($filter);
-            return true;
+            $result = $collection->deleteOne($filter);
+    
+            if ($result->getDeletedCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (MongoDBException $e) {
             throw new \RuntimeException("Erro ao excluir documento: " . $e->getMessage());
         }
     }
+    
 
     public static function updateDocument($collectionName, $filter, $update)
     {
