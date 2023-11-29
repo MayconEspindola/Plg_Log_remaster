@@ -11,6 +11,11 @@
             "Maycon\\PlgLogRemaster\\": "work/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Maycon\\PlgLogRemaster\\Tests\\": "work/tests/"
+        }
+    },
     "authors": [
         {
             "name": "Maycon Espindola",

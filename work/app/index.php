@@ -19,7 +19,7 @@
                     <li><a href="/views/cadastro.html">Criar conta</a></li>
                 
                 </ul>
-            </div>Código
+            </div>
             <div class="content">
                 <h1>PROJETE SEU FUTURO</h1>
                 <div>
