@@ -20,22 +20,19 @@ function exibirProdutos($database) {
     $collectionName = $env['DATABASE']['collectionA1'];
     $result = \app\config\Database::getResultFromQuery($collectionName);
 
+    echo "<h6>Produtos</h6>";
     if ($result !== null) {
         echo "<table class='table table-dark table-striped'>
                 <thead>
                     <tr>
-                        <th scope='col'>Encarregado</th>
                         <th scope='col'>Código</th>
                         <th scope='col'>Modelo</th>
                         <th scope='col'>Descrição</th>
-                        <th scope='col'>Custo</th>
-                        <th scope='col'>Lucro</th>
-                        <th scope='col'>Preço</th>
                         <th scope='col'>Altura</th>
                         <th scope='col'>Largura</th>
                         <th scope='col'>Comprimento</th>
                         <th scope='col'>Peso</th>
-                        <th scope='col'>Nota Fiscal</th>
+                        <th scope='col'>Data e Hora de Inserção</th>
                         <th scope='col'>Ações</th>
                     </tr>
                 </thead>
@@ -43,22 +40,18 @@ function exibirProdutos($database) {
 
         foreach ($result as $row) {
             echo "<tr>";
-            echo "<td>{$row['encarregado']}</td>";
             echo "<td>{$row['codigo']}</td>";
             echo "<td>{$row['modelo']}</td>";
             echo "<td>{$row['descricao']}</td>";
-            echo "<td>{$row['custo']}</td>";
-            echo "<td>{$row['lucro']}</td>";
-            echo "<td>{$row['preco']}</td>";
             echo "<td>{$row['altura']}</td>";
             echo "<td>{$row['largura']}</td>";
             echo "<td>{$row['comprimento']}</td>";
             echo "<td>{$row['peso']}</td>";
-            echo "<td>{$row['notaFiscal']}</td>";
+            echo "<td>{$row['dataHoraInsercao']}</td>";
             echo "<td>
-                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['notaFiscal']}\")'>Detalhes</button>
-                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['notaFiscal']}\")'>Editar</button>
-                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['notaFiscal']}\")'>Excluir</button>
+                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['codigo']}\")'>Detalhes</button>
+                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['codigo']}\")'>Editar</button>
+                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['codigo']}\")'>Excluir</button>
                   </td>";
             echo "</tr>";
         }
@@ -70,19 +63,21 @@ function exibirProdutos($database) {
 }
 ?>
 <script>
-    function exibirDetalhes(notaFiscal) {
-        window.location.href = 'detalhes.php?notaFiscal=' + notaFiscal;
+    function exibirDetalhes(codigo) {
+        // Adicione o redirecionamento ou lógica de detalhes conforme necessário
+        alert('Detalhes do Registro com Código: ' + codigo);
     }
 
-    function editarRegistro(notaFiscal) {
-        alert('Editar Registro com Nota Fiscal: ' + notaFiscal);
+    function editarRegistro(codigo) {
+        // Adicione o redirecionamento ou lógica de edição conforme necessário
+        alert('Editar Registro com Código: ' + codigo);
     }
 
-    function excluirRegistro(notaFiscal) {
-
+    function excluirRegistro(codigo) {
+        // Adicione a lógica de confirmação e exclusão conforme necessário
         /*
-        if (confirm('Tem certeza que deseja excluir o registro com Nota Fiscal ' + notaFiscal + '?')) {
-            excluirRegistroNoBanco(notaFiscal);
+        if (confirm('Tem certeza que deseja excluir o registro com Código ' + codigo + '?')) {
+            excluirRegistroNoBanco(codigo);
         }
         */
     }

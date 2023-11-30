@@ -10,17 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cod = $_POST['codigo'];
     $model = strtoupper($_POST['modelo']);
     $description = strtoupper($_POST['description']);
-    $custo = converterParaPonto($_POST['custo']);
-    $lucro = converterParaPonto($_POST['lucro']);
-    $preco = converterParaPonto($_POST["preco"]);
     $altura = converterParaPonto($_POST["altura"]);
     $largura = converterParaPonto($_POST["largura"]);
     $comprimento = converterParaPonto($_POST["comprimento"]);
     $peso = converterParaPonto($_POST["peso"]);
-    $notaFiscal = $_POST["notaFiscal"];
-    $quantidade = $_POST["quantidade"];
-    $locacao = $_POST["locacao"];
-    
+
+    $codigoControle = $cod;
+
     $dataHoraInsercao = date('d/m/Y-H:i:s');
 
     $envSettings = new \app\config\EnvironmentSettings();
@@ -30,44 +26,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = \app\config\Database::getConnection();
     $collection = $database->selectCollection($collectionName);
 
-    // Verificar se a nota fiscal já existe
-    $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
+    $verificarCodigo = $collection->findOne(['codigo' => (int) $codigoControle]);
 
-    if (verificarCadastro($verificarNotaFiscal, $notaFiscal, $collection, $cod)) {
+    if (verificarCadastro($verificarCodigo, $codigoControle, $collection)) {
         $document = [
             'encarregado' => $nomeUsuario,
-            'codigo' => (int) $cod,
+            'codigo' => (int) $codigoControle,
             'modelo' => $model,
             'descricao' => $description,
-            'custo' => floatval($custo),
-            'lucro' => floatval($lucro),
-            'preco' => floatval($preco),
             'altura' => floatval($altura),
             'largura' => floatval($largura),
             'comprimento' => floatval($comprimento),
             'peso' => floatval($peso),
-            'notaFiscal' => $notaFiscal,
-            'quantidade' => (int) $quantidade,
-            'locacao' => $locacao,
             'dataHoraInsercao' => $dataHoraInsercao,
         ];
 
         cadastrarProduto($collection, $document);
     } else {
-        echo "<script>alert('Não foi possível cadastrar este produto devido a um código já existente nesta nota fiscal');</script>";
+        echo "<script>alert('Não foi possível cadastrar este produto devido a um código já existente');</script>";
         redirecionar('/views/register/registerItem.php');
     }
 } else {
     echo "Método inválido";
 }
 
-function verificarCadastro($verificarNotaFiscal, $notaFiscal, $collection, $cod) {
-    if ($verificarNotaFiscal) {
-        // Verificar se algum código na mesma nota fiscal é igual ao código fornecido
-        $verificarCodigoNaNota = $collection->findOne(['notaFiscal' => $notaFiscal, 'codigo' => (int)$cod]);
-        return !$verificarCodigoNaNota;
-    }
-    return true;
+function verificarCadastro($verificarCodigo, $codigoControle, $collection) {
+    return !$verificarCodigo;
 }
 
 function cadastrarProduto($collection, $document) {

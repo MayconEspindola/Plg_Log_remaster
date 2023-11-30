@@ -11,7 +11,7 @@
             </button>
             <button class="btn btn-primary" type="submit" onclick="navigation.cadCliente()">
                 <img src="/images/pessoas.png" width="60" height="36" alt="Ícone Clientes">
-                Clientes
+                Fornecedores
             </button>
         </div>
     </section>

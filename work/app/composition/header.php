@@ -26,25 +26,21 @@ if (!isset($_SESSION["username"])) {
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
+    
+        <link rel="stylesheet" href="/styles/taffic/invoice.css">
 
-    <link rel="stylesheet" type="text/css" href="/assets/style/alert_traffic.css">
-    <link rel="stylesheet" type="text/css" href="/assets/style/valor_invalido.css">
-    <link rel="stylesheet" type="text/css" href="/assets/style/cad.produto.css">
+    <script> src="/handlers/invoice.js" </script>
     <script src="/handlers/path.js"></script>
-    <script src="/assets/js/controller-soma-sub.js"></script>
     <script src="/handlers/InactivityCheckerjs"></script>
     <script>
         function showInputFields() {
             var form = document.getElementById("reportForm");
             form.style.display = "block";
         }
-        </script>
+    </script>
 </head>
 
 <body>
-    <header>
-
-    </header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center navbar-light bg-light">
         <a class="navbar-brand" href="/views/home.php">
             <img src="/images/PLG-log.png" alt="Logo PLG" width="30" height="24" class="d-inline-block align-text-top">

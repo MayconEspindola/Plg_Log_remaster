@@ -1,0 +1,37 @@
+{
+    "notaFiscal": {
+      "tipo": "entrada",
+      "numero": "123456",
+      "dataEmissao": "2023-11-30",
+      "fornecedor": {
+        "nome": "Fornecedor ABC",
+        "cnpj": "12345678901234",
+        "endereco": "Rua do Fornecedor, 123"
+      },
+      "itens": [
+        {
+          "produto": "Produto A",
+          "quantidade": 10,
+          "valorUnitario": 50.00,
+          "impostos": {
+            "icms": 5.00,
+            "ipi": 2.50
+          }
+        },
+        {
+          "produto": "Produto B",
+          "quantidade": 5,
+          "valorUnitario": 30.00,
+          "impostos": {
+            "icms": 2.50,
+            "ipi": 1.25
+          }
+        }
+      ],
+      "total": {
+        "valorProdutos": 650.00,
+        "valorImpostos": 40.00,
+        "valorTotal": 690.00
+      }
+    }
+  }
