@@ -1,6 +1,4 @@
-<?php
-    include_once("../../composition/header.php"); 
-?>
+<?php include_once("../../composition/header.php"); ?>
 
 <div class="page container-sm">
     <form method="POST" class="formCadastro" action="/controllers/registerItens.php">
@@ -47,6 +45,25 @@
             <input type="text" class="form-control" id="inputPeso" placeholder="Peso" name="peso" required>
             <label for="inputPeso">Peso (kg):</label>
         </div>
+
+        <!-- Quantidade -->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputQuantidade" placeholder="Quantidade" name="quantidade" required>
+            <label for="inputQuantidade">Quantidade:</label>
+        </div>
+
+        <!-- Valor Unitário -->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputValorUnitario" placeholder="Valor Unitário" name="valorUnitario" required>
+            <label for="inputValorUnitario">Valor Unitário:</label>
+        </div>
+
+        <!-- Valor Total -->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputValorTotal" placeholder="Valor Total" name="valorTotal" required>
+            <label for="inputValorTotal">Valor Total:</label>
+        </div>
+
         <hr>
 
         <div class="d-grid gap-2 d-md-block text-center d-flex justify-content-center align-items-center">
