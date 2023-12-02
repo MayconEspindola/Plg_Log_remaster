@@ -1,7 +1,9 @@
 <?php
-// Inicia a sessão
-session_start();
 
+namespace app\controllers;
+use app\controllers\cadastro;
+
+include_once('registerFormProd.php');
 // Verifica se o formulário foi submetido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera os dados do formulário
@@ -14,16 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = $_POST["estado"];
     $cep = $_POST["cep"];
 
-    $formFornecedor = new FormFornecedor($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep);
+    $formProdutos = new formProdutos($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep);
 
-    $_SESSION["formFornecedores"][] = $formFornecedor;
+    $_SESSION["formProdutoses"][] = $formProdutos;
 
     header("Location: /views/register/registerItem.php");
     exit();
 }
 
 
-class FormProduto extends FormularioBase {
+class FormProduto extends controllers\cadastro\FormularioBase {
     private $codigo;
     private $modelo;
     private $descricao;
