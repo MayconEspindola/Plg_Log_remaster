@@ -27,9 +27,6 @@ if (!isset($_SESSION["username"])) {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="/assets/style/alert_traffic.css">
-    <link rel="stylesheet" type="text/css" href="/assets/style/valor_invalido.css">
-    <link rel="stylesheet" type="text/css" href="/assets/style/cad.produto.css">
     <script src="/handlers/path.js"></script>
     <script src="/assets/js/controller-soma-sub.js"></script>
     <script src="/handlers/InactivityCheckerjs"></script>
@@ -52,7 +49,7 @@ if (!isset($_SESSION["username"])) {
         </a>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Introdução</a>
+                <a class="nav-link active" aria-current="page" href="/views/introducao.php">Introdução</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/views/home.php">Home</a>
