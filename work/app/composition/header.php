@@ -22,10 +22,7 @@ if (!isset($_SESSION["username"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css"
         rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+        <link rel="stylesheet" href="/styles/paginas/header.css">
 
 
     <script src="/handlers/path.js"></script>
@@ -39,6 +36,9 @@ if (!isset($_SESSION["username"])) {
 </head>
 
 <body>
+    <header>
+
+    </header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center navbar-light bg-light">
         <a class="navbar-brand" href="/views/home.php">
             <img src="/images/PLG-log.png" alt="Logo PLG" width="30" height="24" class="d-inline-block align-text-top">

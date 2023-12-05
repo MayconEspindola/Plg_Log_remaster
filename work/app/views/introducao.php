@@ -8,8 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLG LOG - Introdução</title>
-    <meta name="description" content="Breve apresentação sobre a empresa.">
-    <link rel="stylesheet" href="/styles/intro.css">
+    <link rel="stylesheet" href="/styles/paginas/intro.css">
 </head>
 <body>
     
@@ -17,8 +16,11 @@
 
     <h1>PLG LOG - Soluções Logística Integradas</h1>
 
-    <sub-title>Sobre Nós:</sub-title>
-
+    
+    <div class="container"> 
+    
+        <sub-title>Sobre Nós:</sub-title>
+    
     <div class="text-intro">
         
         <p> Bem-vindo ao nosso universo logístico, onde eficiência e precisão se encontram para impulsionar o sucesso do seu negócio! No coração da economia moderna, a logística desempenha um papel crucial na cadeia de suprimentos, conectando pessoas, mercadorias e ideias em uma rede global de movimento contínuo.</p>
