@@ -3,19 +3,21 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLG LOG - Home</title>
+
+    <link rel="stylesheet" href="/styles/paginas/home.css">
 </head>
 <body>
     
 </body>
 </html>
 <article>
-    <div class="btns-sect text-center d-flex justify-content-center align-items-center vh-100">
-        <div class="d-grid gap-2 small">
+    <div class="btn-home">
+        <div class="d-grid">
             <h6> Bem vindo! <?php echo $nomeUsuario; ?></h6>
             <button class="btn btn-primary" type="button" onclick="navigation.cadastro()">Cadastro</button>
             <button class="btn btn-primary" type="button" onclick="navigation.movimentacaoProdutos()">Movimentação de Produto</button>
