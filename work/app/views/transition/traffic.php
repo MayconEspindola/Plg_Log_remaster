@@ -13,7 +13,7 @@ include_once("../../composition/header.php");
 </article>
  
 <div class="page container-sm" id='entrySection' style="display: none;">
-    <form method="POST" class="formCadastro" action="/controllers/classSupplier.php">
+    <form method="POST" class="formCadastro" action="/controllers/formFornecedor.php">
         <h1>Cadastro Nota Fiscal</h1>
         <p>Digite os seus dados de acesso no campo abaixo.</p>
  
