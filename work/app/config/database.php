@@ -1,6 +1,8 @@
 <?php
 
-namespace app\config;
+namespace work\config;
+
+require __DIR__ . '/../../vendor/autoload.php';
 
 use MongoDB\Client;
 use MongoDB\Driver\Exception\Exception as MongoDBException;

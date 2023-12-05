@@ -1,8 +1,9 @@
 <?php
-namespace app\config;
+namespace work\controllers;
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/EnvironmentSettings.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 class UsuarioController
 {

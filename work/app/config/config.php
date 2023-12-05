@@ -1,5 +1,6 @@
 <?php
-namespace app\config;
+namespace work\config;
+require __DIR__ . '/../../vendor/autoload.php';
 
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_TIME, 'pt-BR', "pt_BR.utf-8", "portuguese");

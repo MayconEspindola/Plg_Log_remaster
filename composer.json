@@ -8,12 +8,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Maycon\\PlgLogRemaster\\": "work/"
+            "work\\": "work/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Maycon\\PlgLogRemaster\\Tests\\": "work/tests/"
+            "work\\Tests\\": "work/tests/"
         }
     },
     "authors": [

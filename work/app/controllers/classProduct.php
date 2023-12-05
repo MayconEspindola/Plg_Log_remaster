@@ -1,29 +1,56 @@
 <?php
-// Inicia a sessão
 session_start();
 
-// Verifica se o formulário foi submetido
+
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/EnvironmentSettings.php';
+require __DIR__ . '/../../vendor/autoload.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera os dados do formulário
-    $notaFiscal = $_POST["invoice"];
-    $dataEmissao = $_POST["dataEmissao"];
-    $nomeFornecedor = $_POST["nomeFornecedor"];
-    $cnpjFornecedor = $_POST["cnpjFornecedor"];
-    $logradouro = $_POST["Logradouro"];
-    $cidade = $_POST["cidade"];
-    $estado = $_POST["estado"];
-    $cep = $_POST["cep"];
+    processarFormulario();
+}
 
-    $formFornecedor = new FormFornecedor($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep);
+function processarFormulario() {
+    $envSettings = new EnvironmentSettings();
+    $env = $envSettings->obterConfiguracoes();
+    $collectionName = $env['DATABASE']['collectionA1'];
 
-    $_SESSION["formFornecedores"][] = $formFornecedor;
+    $database = Database::getConnection();
+    $collection = $database->selectCollection($collectionName);
 
+    $notaFiscal = isset($_SESSION["notaFiscal"]) ? $_SESSION["notaFiscal"] : '';
+    $dataEmissao = isset($_POST["dataEmissao"]) ? $_POST["dataEmissao"] : '';
+    $nomeFornecedor = isset($_POST["nomeFornecedor"]) ? $_POST["nomeFornecedor"] : '';
+    $cnpjFornecedor = isset($_POST["cnpjFornecedor"]) ? $_POST["cnpjFornecedor"] : '';
+    $logradouro = isset($_POST["Logradouro"]) ? $_POST["Logradouro"] : '';
+    $cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : '';
+    $estado = isset($_POST["estado"]) ? $_POST["estado"] : '';
+    $cep = isset($_POST["cep"]) ? $_POST["cep"] : '';
+
+    if (dadosValidos($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep)) {
+        $formFornecedor = new FormFornecedor($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep);
+        salvarNoBanco($collection, $formFornecedor);
+        redirecionar();
+    } else {
+        echo "Dados inválidos. Por favor, preencha todos os campos.";
+    }
+}
+
+function dadosValidos($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep) {
+    // Adicione validações conforme necessário
+    return !empty($notaFiscal) && !empty($dataEmissao) && !empty($nomeFornecedor) && !empty($cnpjFornecedor);
+}
+
+function salvarNoBanco($collection, $formFornecedor) {
+    $result = $collection->insertOne($formFornecedor);
+}
+
+function redirecionar() {
     header("Location: /views/register/registerItem.php");
     exit();
 }
 
-
-class FormProduto extends FormularioBase {
+class FormProduto {
     private $codigo;
     private $modelo;
     private $descricao;
@@ -35,7 +62,6 @@ class FormProduto extends FormularioBase {
     private $valorUnitario;
     private $valorTotal;
 
-    // Construtor para inicializar os atributos
     public function __construct($codigo, $modelo, $descricao, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal) {
         $this->codigo = $codigo;
         $this->modelo = $modelo;
@@ -49,86 +75,16 @@ class FormProduto extends FormularioBase {
         $this->valorTotal = $valorTotal;
     }
 
-    // Métodos getters
-    public function getCodigo() {
-        return $this->codigo;
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
     }
 
-    public function getModelo() {
-        return $this->modelo;
-    }
-
-    public function getDescricao() {
-        return $this->descricao;
-    }
-
-    public function getAltura() {
-        return $this->altura;
-    }
-
-    public function getLargura() {
-        return $this->largura;
-    }
-
-    public function getComprimento() {
-        return $this->comprimento;
-    }
-
-    public function getPeso() {
-        return $this->peso;
-    }
-
-    public function getQuantidade() {
-        return $this->quantidade;
-    }
-
-    public function getValorUnitario() {
-        return $this->valorUnitario;
-    }
-
-    public function getValorTotal() {
-        return $this->valorTotal;
-    }
-
-    // Métodos setters
-    public function setCodigo($codigo) {
-        $this->codigo = $codigo;
-    }
-
-    public function setModelo($modelo) {
-        $this->modelo = $modelo;
-    }
-
-    public function setDescricao($descricao) {
-        $this->descricao = $descricao;
-    }
-
-    public function setAltura($altura) {
-        $this->altura = $altura;
-    }
-
-    public function setLargura($largura) {
-        $this->largura = $largura;
-    }
-
-    public function setComprimento($comprimento) {
-        $this->comprimento = $comprimento;
-    }
-
-    public function setPeso($peso) {
-        $this->peso = $peso;
-    }
-
-    public function setQuantidade($quantidade) {
-        $this->quantidade = $quantidade;
-    }
-
-    public function setValorUnitario($valorUnitario) {
-        $this->valorUnitario = $valorUnitario;
-    }
-
-    public function setValorTotal($valorTotal) {
-        $this->valorTotal = $valorTotal;
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
     }
 }
 ?>
