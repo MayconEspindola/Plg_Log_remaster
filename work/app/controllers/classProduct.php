@@ -1,90 +1,75 @@
 <?php
-session_start();
-
-
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/EnvironmentSettings.php';
-require __DIR__ . '/../../vendor/autoload.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    processarFormulario();
+    cadastrarProduto();
 }
 
-function processarFormulario() {
-    $envSettings = new EnvironmentSettings();
-    $env = $envSettings->obterConfiguracoes();
-    $collectionName = $env['DATABASE']['collectionA1'];
+function cadastrarProduto() {
+    try {
+        $envSettings = new \work\config\EnvironmentSettings();
+        $env = $envSettings->obterConfiguracoes();
 
-    $database = Database::getConnection();
-    $collection = $database->selectCollection($collectionName);
+        $database = \work\config\Database::getConnection();
 
-    $notaFiscal = isset($_SESSION["notaFiscal"]) ? $_SESSION["notaFiscal"] : '';
-    $codigo = isset($_POST["codigo"]) ? $_POST["codigo"] : '';
-    $modelo = isset($_POST["modelo"]) ? $_POST["modelo"] : '';
-    $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : '';
-    $logradouro = isset($_POST["Logradouro"]) ? $_POST["Logradouro"] : '';
-    $cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : '';
-    $estado = isset($_POST["estado"]) ? $_POST["estado"] : '';
-    $cep = isset($_POST["cep"]) ? $_POST["cep"] : '';
+        $collectionName = $env['DATABASE']['collectionA1'];
 
-    if (dadosValidos($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep)) {
-        $formFornecedor = new FormFornecedor($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep);
-        salvarNoBanco($collection, $formFornecedor);
-        redirecionar();
-    } else {
-        echo "Dados inválidos. Por favor, preencha todos os campos.";
+        $collectionFornecedor = $database->selectCollection($collectionName);
+
+        $notaFiscal = isset($_POST["invoice"]) ? $_POST["invoice"] : '';
+        $codigo = isset($_POST["codigo"]) ? $_POST["codigo"] : '';
+        $modelo = isset($_POST["modelo"]) ? $_POST["modelo"] : '';
+        $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : '';
+        $altura = isset($_POST["altura"]) ? $_POST["altura"] : '';
+        $largura = isset($_POST["largura"]) ? $_POST["largura"] : '';
+        $comprimento = isset($_POST["comprimento"]) ? $_POST["comprimento"] : '';
+        $peso = isset($_POST["peso"]) ? $_POST["peso"] : '';
+        $quantidade = isset($_POST["quantidade"]) ? $_POST["quantidade"] : '';
+        $valorUnitario = isset($_POST["valorUnitario"]) ? $_POST["valorUnitario"] : '';
+        $valorTotal = isset($_POST["valorTotal"]) ? $_POST["valorTotal"] : '';
+
+        if (dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal)) {
+            $produto = [
+                'codigo' => $codigo,
+                'modelo' => $modelo,
+                'descricao' => $descricao,
+                'altura' => $altura,
+                'largura' => $largura,
+                'comprimento' => $comprimento,
+                'peso' => $peso,
+                'quantidade' => $quantidade,
+                'valorUnitario' => $valorUnitario,
+                'valorTotal' => $valorTotal,
+            ];
+
+            $filtro = ['notaFiscal' => $notaFiscal];
+            $atualizacao = ['$addToSet' => ['produtos' => $produto]];
+
+            $result = $collectionFornecedor->updateOne($filtro, $atualizacao);
+
+            if ($result->getModifiedCount() === 0) {
+                echo "Nota fiscal não encontrada. Por favor, verifique a nota fiscal e tente novamente.";
+            } else {
+                redirecionar('/views/register/registerItem.php');
+            }
+        } else {
+            echo "Dados inválidos. Por favor, preencha todos os campos.";
+        }
+    } catch (\Exception $e) {
+        echo "Não foi possível cadastrar o produto. Por favor, tente novamente.";
     }
 }
 
-function dadosValidos($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep) {
+function dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal) {
     // Adicione validações conforme necessário
-    return !empty($notaFiscal) && !empty($codigo) && !empty($modelo) && !empty($descricao);
+    return !empty($codigo) && !empty($modelo) && !empty($altura) && !empty($largura)
+        && !empty($comprimento) && !empty($peso) && !empty($quantidade)
+        && !empty($valorUnitario) && !empty($valorTotal);
 }
 
-function salvarNoBanco($collection, $formFornecedor) {
-    $result = $collection->insertOne($formFornecedor);
-}
-
-function redirecionar() {
-    header("Location: /views/register/registerItem.php");
+function redirecionar($url) {
+    header("Location: $url");
     exit();
-}
-
-class FormProduto {
-    private $codigo;
-    private $modelo;
-    private $descricao;
-    private $altura;
-    private $largura;
-    private $comprimento;
-    private $peso;
-    private $quantidade;
-    private $valorUnitario;
-    private $valorTotal;
-
-    public function __construct($codigo, $modelo, $descricao, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal) {
-        $this->codigo = $codigo;
-        $this->modelo = $modelo;
-        $this->descricao = $descricao;
-        $this->altura = $altura;
-        $this->largura = $largura;
-        $this->comprimento = $comprimento;
-        $this->peso = $peso;
-        $this->quantidade = $quantidade;
-        $this->valorUnitario = $valorUnitario;
-        $this->valorTotal = $valorTotal;
-    }
-
-    public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        }
-    }
-
-    public function __set($property, $value) {
-        if (property_exists($this, $property)) {
-            $this->$property = $value;
-        }
-    }
 }
 ?>

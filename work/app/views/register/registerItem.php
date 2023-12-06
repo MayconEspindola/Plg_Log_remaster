@@ -1,10 +1,16 @@
 <?php include_once("../../composition/header.php"); ?>
 
 <div class="page container-sm">
-    <form method="POST" class="formCadastro" action="/controllers/registerItens.php">
+    <form method="POST" class="formCadastro" action="/controllers/classProduct.php">
         <h1>Cadastro Produto</h1>
         <p>Digite os seus dados de acesso no campo abaixo.</p>
 
+        <!-- Nota Fiscal -->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputinvoice" placeholder="Nota Fiscal" name="invoice" maxlength="9" required>
+            <label for="inputinvoice">Nota Fiscal:</label>
+        </div>
+        
         <!-- Código -->
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="inputCodigo" placeholder="Código" name="codigo" maxlength="12" required>
