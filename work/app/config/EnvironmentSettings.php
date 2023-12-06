@@ -2,9 +2,6 @@
 
 namespace work\config;
 
-require __DIR__ . '/../../vendor/autoload.php';
-
-
 class EnvironmentSettings {
     private $env;
 

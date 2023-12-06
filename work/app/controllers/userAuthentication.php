@@ -10,10 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['nome'];
         $senha = $_POST['senha'];
 
-        $envSettings = new \app\config\EnvironmentSettings();
+        $envSettings = new \work\config\EnvironmentSettings();
         $env = $envSettings->obterConfiguracoes();
 
-        $database = \app\config\Database::getConnection();
+        $database = \work\config\Database::getConnection();
         $collectionName = $env['DATABASE']['collectionA2'];
         $collection = $database->selectCollection($collectionName);
 

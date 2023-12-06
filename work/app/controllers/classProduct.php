@@ -11,11 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function processarFormulario() {
-    $envSettings = new EnvironmentSettings();
+    $envSettings = new \work\config\EnvironmentSettings();
     $env = $envSettings->obterConfiguracoes();
     $collectionName = $env['DATABASE']['collectionA1'];
 
-    $database = Database::getConnection();
+    $database = \work\config\Database::getConnection();
     $collection = $database->selectCollection($collectionName);
 
     $notaFiscal = isset($_SESSION["notaFiscal"]) ? $_SESSION["notaFiscal"] : '';
