@@ -39,11 +39,22 @@ if (!isset($_SESSION["username"])) {
     <header>
 
     </header>
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center navbar-light bg-light">
         <a class="navbar-brand" href="/views/home.php">
             <img src="/images/PLG-log.png" alt="Logo PLG" width="30" height="24" class="d-inline-block align-text-top">
             PLG LOG
         </a>
+=======
+    <nav class="navbar">
+
+        <div class="logo">
+            <a href="/views/home.php">
+                <img src="/images/PLG-log.png" alt="Logo PLG">
+            </a>
+        </div>
+
+>>>>>>> e50af20 (salvar)
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/views/introducao.php">Introdução</a>
@@ -64,9 +75,15 @@ if (!isset($_SESSION["username"])) {
                     <button type="submit">Confirmar</button>
                 </form>
             </li>
+<<<<<<< HEAD
             <li class="nav-item">
                 <form action="/controllers/logout.php" method="post">
                     <button type="submit" class="btn btn-link">
+=======
+            <li>
+                <form action="/controllers/logout.php" method="post">
+                    <button type="submit" class="btn-link">
+>>>>>>> e50af20 (salvar)
                         <i class="bi bi-box-arrow-right"></i> Sair
                     </button>
                 </form>
