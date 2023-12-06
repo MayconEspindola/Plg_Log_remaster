@@ -50,13 +50,42 @@ if ($verificarNotaFiscal) {
 =======
     $verificarNotaFiscal = $collection->findOne(['notaFiscal' => $notaFiscal]);
 }
+<<<<<<< HEAD
 >>>>>>> 725f0fb ( No ramo Plg_Log_remaster-Miler)
+=======
+>>>>>>> e50af20d38dfea7b7ac374c2cd6411b2d2208a73
 
     $result = $collection->insertOne($document);
 
     if ($result->getInsertedCount() > 0) {
         redirecionar('/views/register/registerItem.php');
     } else {
+<<<<<<< HEAD
+=======
+        $document = [
+            'encarregado' => $nomeUsuario,
+            'codigo' => (int) $cod,
+            'modelo' => $model,
+            'descricao' => $description,
+            'custo' => floatval($custo),
+            'lucro' => floatval($lucro),
+            'preco' => floatval($preco),
+            'altura' => floatval($altura),
+            'largura' => floatval($largura),
+            'comprimento' => floatval($comprimento),
+            'peso' => floatval($peso),
+            'notaFiscal' => $notaFiscal,
+            'quantidade' => (int) $quantidade,
+            'locacao' => $locacao,
+            'dataHoraInsercao' => $dataHoraInsercao,
+        ];
+
+        $result = $collection->insertOne($document);
+
+    if ($result->getInsertedCount() > 0) {
+        redirecionar('/views/register/registerItem.php');
+    } else {
+>>>>>>> e50af20d38dfea7b7ac374c2cd6411b2d2208a73
         echo "<script>alert('Não foi possível cadastrar este produto');</script>";
         redirecionar('/views/register/registerItem.php');
     }
@@ -77,4 +106,7 @@ function converterParaPonto($valor) {
 
 }
 ?>
+<<<<<<< HEAD
 >>>>>>> 725f0fb ( No ramo Plg_Log_remaster-Miler)
+=======
+>>>>>>> e50af20d38dfea7b7ac374c2cd6411b2d2208a73
