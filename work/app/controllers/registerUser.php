@@ -1,5 +1,5 @@
 <?php
-namespace work\controllers;
+namespace app\config;
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/EnvironmentSettings.php';
@@ -9,10 +9,10 @@ class UsuarioController
     public function cadastrarUsuario($nome, $senha)
     {
         try {
-            $envSettings = new EnvironmentSettings();
+            $envSettings = new \work\config\EnvironmentSettings();
             $env = $envSettings->obterConfiguracoes();
 
-            $database = Database::getConnection();
+            $database = \work\config\Database::getConnection();
 
             $collectionName = $env['DATABASE']['collectionA2'];
             $collection = $database->selectCollection($collectionName);
@@ -34,7 +34,7 @@ class UsuarioController
                     'privilegio' => 1,
                 ];
 
-                Database::insertDocument($collectionName, $document);
+                \work\config\Database::insertDocument($collectionName, $document);
 
                 echo "<script>window.location.href='/views/login.php'</script>";
             }

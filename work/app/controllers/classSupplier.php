@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $notaFiscal = $_POST["invoice"];
 
+        $_SESSION['notaFiscal'] = $notaFiscal;
+
         if (notaFiscalDuplicada($collection, $notaFiscal)) {
             redirecionar("/views/transition/traffic.php");
         }

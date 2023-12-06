@@ -11,24 +11,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function processarFormulario() {
-    $envSettings = new \work\config\EnvironmentSettings();
+    $envSettings = new EnvironmentSettings();
     $env = $envSettings->obterConfiguracoes();
     $collectionName = $env['DATABASE']['collectionA1'];
 
-    $database = \work\config\Database::getConnection();
+    $database = Database::getConnection();
     $collection = $database->selectCollection($collectionName);
 
     $notaFiscal = isset($_SESSION["notaFiscal"]) ? $_SESSION["notaFiscal"] : '';
-    $dataEmissao = isset($_POST["dataEmissao"]) ? $_POST["dataEmissao"] : '';
-    $nomeFornecedor = isset($_POST["nomeFornecedor"]) ? $_POST["nomeFornecedor"] : '';
-    $cnpjFornecedor = isset($_POST["cnpjFornecedor"]) ? $_POST["cnpjFornecedor"] : '';
+    $codigo = isset($_POST["codigo"]) ? $_POST["codigo"] : '';
+    $modelo = isset($_POST["modelo"]) ? $_POST["modelo"] : '';
+    $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : '';
     $logradouro = isset($_POST["Logradouro"]) ? $_POST["Logradouro"] : '';
     $cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : '';
     $estado = isset($_POST["estado"]) ? $_POST["estado"] : '';
     $cep = isset($_POST["cep"]) ? $_POST["cep"] : '';
 
-    if (dadosValidos($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep)) {
-        $formFornecedor = new FormFornecedor($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep);
+    if (dadosValidos($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep)) {
+        $formFornecedor = new FormFornecedor($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep);
         salvarNoBanco($collection, $formFornecedor);
         redirecionar();
     } else {
@@ -36,9 +36,9 @@ function processarFormulario() {
     }
 }
 
-function dadosValidos($notaFiscal, $dataEmissao, $nomeFornecedor, $cnpjFornecedor, $logradouro, $cidade, $estado, $cep) {
+function dadosValidos($notaFiscal, $codigo, $modelo, $descricao, $logradouro, $cidade, $estado, $cep) {
     // Adicione validações conforme necessário
-    return !empty($notaFiscal) && !empty($dataEmissao) && !empty($nomeFornecedor) && !empty($cnpjFornecedor);
+    return !empty($notaFiscal) && !empty($codigo) && !empty($modelo) && !empty($descricao);
 }
 
 function salvarNoBanco($collection, $formFornecedor) {
