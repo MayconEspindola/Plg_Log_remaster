@@ -30,28 +30,32 @@ function cadastrarProduto() {
         $valorTotal = isset($_POST["valorTotal"]) ? $_POST["valorTotal"] : '';
 
         if (dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal)) {
-            $produto = [
-                'codigo' => $codigo,
-                'modelo' => $modelo,
-                'descricao' => $descricao,
-                'altura' => $altura,
-                'largura' => $largura,
-                'comprimento' => $comprimento,
-                'peso' => $peso,
-                'quantidade' => $quantidade,
-                'valorUnitario' => $valorUnitario,
-                'valorTotal' => $valorTotal,
-            ];
-
-            $filtro = ['notaFiscal' => $notaFiscal];
-            $atualizacao = ['$addToSet' => ['produtos' => $produto]];
-
-            $result = $collectionFornecedor->updateOne($filtro, $atualizacao);
-
-            if ($result->getModifiedCount() === 0) {
-                echo "Nota fiscal não encontrada. Por favor, verifique a nota fiscal e tente novamente.";
+            if (codigoDuplicado($collectionFornecedor, $notaFiscal, $codigo)) {
+                echo "Código duplicado. Por favor, insira um código único.";
             } else {
-                redirecionar('/views/register/registerItem.php');
+                $produto = [
+                    'codigo' => $codigo,
+                    'modelo' => $modelo,
+                    'descricao' => $descricao,
+                    'altura' => $altura,
+                    'largura' => $largura,
+                    'comprimento' => $comprimento,
+                    'peso' => $peso,
+                    'quantidade' => $quantidade,
+                    'valorUnitario' => $valorUnitario,
+                    'valorTotal' => $valorTotal,
+                ];
+
+                $filtro = ['notaFiscal' => $notaFiscal];
+                $atualizacao = ['$addToSet' => ['produtos' => $produto]];
+
+                $result = $collectionFornecedor->updateOne($filtro, $atualizacao);
+
+                if ($result->getModifiedCount() === 0) {
+                    echo "Nota fiscal não encontrada. Por favor, verifique a nota fiscal e tente novamente.";
+                } else {
+                    redirecionar('/views/register/registerItem.php');
+                }
             }
         } else {
             echo "Dados inválidos. Por favor, preencha todos os campos.";
@@ -66,6 +70,13 @@ function dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, 
     return !empty($codigo) && !empty($modelo) && !empty($altura) && !empty($largura)
         && !empty($comprimento) && !empty($peso) && !empty($quantidade)
         && !empty($valorUnitario) && !empty($valorTotal);
+}
+
+function codigoDuplicado($collection, $notaFiscal, $codigo) {
+    $filtro = ['notaFiscal' => $notaFiscal, 'produtos.codigo' => $codigo];
+    $resultado = $collection->findOne($filtro);
+
+    return ($resultado !== null);
 }
 
 function redirecionar($url) {

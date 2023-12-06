@@ -3,36 +3,36 @@ require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/EnvironmentSettings.php';
 include_once("../../composition/header.php");
 
-$envSettings = new \app\config\EnvironmentSettings();
+$envSettings = new \work\config\EnvironmentSettings();
 $env = $envSettings->obterConfiguracoes();
 
-$database = \app\config\Database::getConnection();
+$database = \work\config\Database::getConnection();
 
 if ($database !== null) {
-    exibirProdutos($database);
+    exibirFornecedores($database);
 } else {
     echo "Erro ao conectar ao MongoDB.";
 }
 
-function exibirProdutos($database) {
+function exibirFornecedores($database) {
     global $env;
 
     $collectionName = $env['DATABASE']['collectionA1'];
-    $result = \app\config\Database::getResultFromQuery($collectionName);
+    $result = \work\config\Database::getResultFromQuery($collectionName);
 
-    echo "<h6>Produtos</h6>";
+    echo "<h6>Fornecedores</h6>";
     if ($result !== null) {
         echo "<table class='table table-dark table-striped'>
                 <thead>
                     <tr>
-                        <th scope='col'>Código</th>
-                        <th scope='col'>Modelo</th>
-                        <th scope='col'>Descrição</th>
-                        <th scope='col'>Altura</th>
-                        <th scope='col'>Largura</th>
-                        <th scope='col'>Comprimento</th>
-                        <th scope='col'>Peso</th>
-                        <th scope='col'>Data e Hora de Inserção</th>
+                        <th scope='col'>Nota Fiscal</th>
+                        <th scope='col'>Data de Emissão</th>
+                        <th scope='col'>Nome do Fornecedor</th>
+                        <th scope='col'>CNPJ do Fornecedor</th>
+                        <th scope='col'>Logradouro</th>
+                        <th scope='col'>Cidade</th>
+                        <th scope='col'>Estado</th>
+                        <th scope='col'>CEP</th>
                         <th scope='col'>Ações</th>
                     </tr>
                 </thead>
@@ -40,32 +40,31 @@ function exibirProdutos($database) {
 
         foreach ($result as $row) {
             echo "<tr>";
-            echo "<td>{$row['codigo']}</td>";
-            echo "<td>{$row['modelo']}</td>";
-            echo "<td>{$row['descricao']}</td>";
-            echo "<td>{$row['altura']}</td>";
-            echo "<td>{$row['largura']}</td>";
-            echo "<td>{$row['comprimento']}</td>";
-            echo "<td>{$row['peso']}</td>";
-            echo "<td>{$row['dataHoraInsercao']}</td>";
+            echo "<td>{$row['notaFiscal']}</td>";
+            echo "<td>{$row['dataEmissao']}</td>";
+            echo "<td>{$row['nomeFornecedor']}</td>";
+            echo "<td>{$row['cnpjFornecedor']}</td>";
+            echo "<td>{$row['logradouro']}</td>";
+            echo "<td>{$row['cidade']}</td>";
+            echo "<td>{$row['estado']}</td>";
+            echo "<td>{$row['cep']}</td>";
             echo "<td>
-                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['codigo']}\")'>Detalhes</button>
-                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['codigo']}\")'>Editar</button>
-                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['codigo']}\")'>Excluir</button>
+                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['notaFiscal']}\")'>Detalhes</button>
+                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['notaFiscal']}\")'>Editar</button>
+                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['notaFiscal']}\")'>Excluir</button>
                   </td>";
             echo "</tr>";
         }
 
         echo "</tbody></table>";
     } else {
-        echo "Erro na consulta de Produtos.";
+        echo "Erro na consulta de Fornecedores.";
     }
 }
 ?>
 <script>
-    function exibirDetalhes(codigo) {
-        // Adicione o redirecionamento ou lógica de detalhes conforme necessário
-        alert('Detalhes do Registro com Código: ' + codigo);
+    function exibirDetalhes(notaFiscal) {
+        window.location.href = '/views/tables/detalhes.php?notaFiscal=' + encodeURIComponent(notaFiscal);
     }
 
     function editarRegistro(codigo) {
