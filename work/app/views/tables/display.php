@@ -39,21 +39,7 @@ function exibirFornecedores($database) {
                 <tbody>";
 
         foreach ($result as $row) {
-            echo "<tr>";
-            echo "<td>{$row['notaFiscal']}</td>";
-            echo "<td>{$row['dataEmissao']}</td>";
-            echo "<td>{$row['nomeFornecedor']}</td>";
-            echo "<td>{$row['cnpjFornecedor']}</td>";
-            echo "<td>{$row['logradouro']}</td>";
-            echo "<td>{$row['cidade']}</td>";
-            echo "<td>{$row['estado']}</td>";
-            echo "<td>{$row['cep']}</td>";
-            echo "<td>
-                    <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['notaFiscal']}\")'>Detalhes</button>
-                    <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['notaFiscal']}\")'>Editar</button>
-                    <button type='button' class='btn btn-danger' onclick='excluirRegistro(\"{$row['notaFiscal']}\")'>Excluir</button>
-                  </td>";
-            echo "</tr>";
+            exibirFornecedor($row);
         }
 
         echo "</tbody></table>";
@@ -61,7 +47,40 @@ function exibirFornecedores($database) {
         echo "Erro na consulta de Fornecedores.";
     }
 }
+
+function exibirFornecedor($row) {
+    echo "<tr>";
+    echo "<td>{$row['notaFiscal']}</td>";
+    echo "<td>{$row['dataEmissao']}</td>";
+    echo "<td>{$row['nomeFornecedor']}</td>";
+    echo "<td>{$row['cnpjFornecedor']}</td>";
+    echo "<td>{$row['logradouro']}</td>";
+    echo "<td>{$row['cidade']}</td>";
+    echo "<td>{$row['estado']}</td>";
+    echo "<td>{$row['cep']}</td>";
+    echo "<td>
+            <button type='button' class='btn btn-info' onclick='exibirDetalhes(\"{$row['notaFiscal']}\")'>Detalhes</button>
+            <button type='button' class='btn btn-warning' onclick='editarRegistro(\"{$row['notaFiscal']}\")'>Editar</button>
+            
+            <!-- Formulário de exclusão -->
+            <form method='post' action='/../../controllers/deleteInvoice.phpp'>
+                <input type='hidden' name='notaFiscal' value='{$row['notaFiscal']}'>
+                <button type='submit' class='btn btn-danger'>Excluir</button>
+            </form>
+          </td>";
+    echo "</tr>";
+}
+
+// Verifica se a nota fiscal foi enviada via POST para excluir
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['notaFiscal'])) {
+    $notaFiscalParaExcluir = $_POST['notaFiscal'];
+
+    // Realiza a exclusão no arquivo PHP específico
+    require_once('../../controllers/excluir_nota_fiscal.php');
+    excluirNotaFiscal($notaFiscalParaExcluir);
+}
 ?>
+
 <script>
     function exibirDetalhes(notaFiscal) {
         window.location.href = '/views/tables/detalhes.php?notaFiscal=' + encodeURIComponent(notaFiscal);
@@ -70,14 +89,5 @@ function exibirFornecedores($database) {
     function editarRegistro(codigo) {
         // Adicione o redirecionamento ou lógica de edição conforme necessário
         alert('Editar Registro com Código: ' + codigo);
-    }
-
-    function excluirRegistro(codigo) {
-        // Adicione a lógica de confirmação e exclusão conforme necessário
-        /*
-        if (confirm('Tem certeza que deseja excluir o registro com Código ' + codigo + '?')) {
-            excluirRegistroNoBanco(codigo);
-        }
-        */
     }
 </script>
