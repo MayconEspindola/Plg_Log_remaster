@@ -1,12 +1,20 @@
 * {
     margin: 0px; 
     padding: 0px; 
+<<<<<<< HEAD
 
  
 }
 
 body {
     height: 100vh;
+=======
+    box-sizing: border-box;
+    vertical-align: baseline; 
+}
+
+body {
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, rgba(205, 166, 221, 0.4), rgba(90, 236, 205, 0.4)); 
 }
@@ -22,6 +30,10 @@ article {
     align-items: center;
     gap: 36px;
     height: 100vh;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
 }
 
 .d-grid {
@@ -32,5 +44,9 @@ article {
     gap: 36px;
     padding: 10px;
     /* width: 165px; */
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b

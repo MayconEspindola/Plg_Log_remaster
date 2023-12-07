@@ -44,7 +44,11 @@ h1{
     padding: 24px;
     text-align: justify;
     border-radius: 16px;
+<<<<<<< HEAD
     background-color: aliceblue;
+=======
+    background-color: rgb(14, 120, 212);  
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);   
 }
 

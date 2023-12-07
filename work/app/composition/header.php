@@ -23,7 +23,18 @@ if (!isset($_SESSION["username"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css"
         rel="stylesheet">
 
+<<<<<<< HEAD
     <script> src="/handlers/invoice.js" </script>
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/assets/style/alert_traffic.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style/valor_invalido.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style/cad.produto.css">
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
     <script src="/handlers/path.js"></script>
     <script src="/handlers/InactivityCheckerjs"></script>
     <script>
@@ -35,7 +46,14 @@ if (!isset($_SESSION["username"])) {
 </head>
 
 <body>
+<<<<<<< HEAD
     <nav class="navbar">
+=======
+    <header>
+
+    </header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center navbar-light bg-light">
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
         <a class="navbar-brand" href="/views/home.php">
             <img src="/images/PLG-log.png" alt="Logo PLG" width="60" height="48">
         </a>

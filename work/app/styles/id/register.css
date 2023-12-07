@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
     margin: 0;
     padding: 0;
@@ -100,3 +101,38 @@ button:hover{
         height: 100%;
     }
 }
+=======
+.box_register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    
+
+.btn1{
+position: absolute;
+width: 150px;
+height: 100px;
+left: auto;
+top: 300px;
+background: #211818;
+}
+
+
+.btn2{
+
+position: absolute;
+width: 150px;
+height: 100px;
+left: auto;
+top: 450px;
+background: #ac0a0a;
+    &&:hover{
+        background-color:aliceblue;
+    }
+
+    
+}
+
+>>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
