@@ -10,24 +10,18 @@ if (!isset($_SESSION["username"])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PJL LOG</title>
+    <title>PLG LOG</title>
     <link rel="icon" type="image/x-icon" href="/images/PLG-log.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css"
-        rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
     
-        <link rel="stylesheet" href="/styles/taffic/invoice.css">
+    <link rel="stylesheet" href="/styles/id/header.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <script> src="/handlers/invoice.js" </script>
     <script src="/handlers/path.js"></script>
@@ -41,14 +35,13 @@ if (!isset($_SESSION["username"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center navbar-light bg-light">
+    <nav class="navbar">
         <a class="navbar-brand" href="/views/home.php">
-            <img src="/images/PLG-log.png" alt="Logo PLG" width="30" height="24" class="d-inline-block align-text-top">
-            PLG LOG
+            <img src="/images/PLG-log.png" alt="Logo PLG" width="60" height="48">
         </a>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Introdução</a>
+                <a class="nav-link active" aria-current="page" href="/views/introducao.php">Introdução</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/views/home.php">Home</a>
@@ -60,15 +53,16 @@ if (!isset($_SESSION["username"])) {
                 <a class="nav-link" onclick="showInputFields()">
                     Gerar Relatório
                 </a>
-                <form id="reportForm" action="/report/generate_report.php" method="post" onsubmit="return confirmInput()" style="display: none;">
+                <form id="reportForm" action="/report/generate_report.php" method="post"
+                    onsubmit="return confirmInput()" style="display: none;">
                     <input type="text" name="email" placeholder="E-mail" required>
                     <input type="text" name="remetente" placeholder="Remetente" required>
                     <button type="submit">Confirmar</button>
                 </form>
             </li>
-            <li class="nav-item">
+            <li>
                 <form action="/controllers/logout.php" method="post">
-                    <button type="submit" class="btn btn-link">
+                    <button type="submit" class="btnSair btn-link">
                         <i class="bi bi-box-arrow-right"></i> Sair
                     </button>
                 </form>

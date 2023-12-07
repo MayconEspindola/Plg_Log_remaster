@@ -23,11 +23,12 @@
       margin: 0px; 
       padding: 0px; 
       box-sizing: border-box;
+      align-items: baseline;
+      font-family: 'Poppins', sans-serif;
   }
   
   body, html {
       height: 100%;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   ul, li {
@@ -50,7 +51,6 @@
   
   .text1 {
     text-decoration: none;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 15px;
     color: var(--text1);
     line-height: 1.5;
@@ -59,7 +59,6 @@
   .text2 {
     text-decoration: none;  
     display:inline-block;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 15px;
     color: var(--main-color);
     line-height: 1.5;
@@ -121,7 +120,6 @@
   
   .login-form-title {
     display: block;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 39px;
     color: var(--highligth-text);
     line-height: 1.2;
@@ -139,7 +137,6 @@
   }
   
   .input-form {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
     color: var(--input-text);
     line-height: 1.2;
@@ -175,7 +172,6 @@
   }
   
   .focus-input-form::after {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
     color: var(--text1);
     line-height: 1.2;
@@ -218,7 +214,6 @@
   }
   
   .login-form-btn {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 16px;
     color: var(--white-color);
     line-height: 1.2;
@@ -243,20 +238,19 @@
   */
   
   a {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--link-color);
-      margin: 0px;
-      transition: all 0.4s;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--link-color);
+    margin: 0px;
+    transition: all 0.4s;
   }
   
   a:focus {
-      outline: none !important;
+    outline: none !important;
   }
   
   a:hover {
-      text-decoration: none;
+    text-decoration: none;
     color: var(--highligth-text);
   }
   /*

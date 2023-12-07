@@ -74,6 +74,8 @@
                 <label for="floatingEmail">Email:</label>
             </div>
             <input type="submit" value="Cadastrar" class="btn btn-danger" id="cadastro" />
+            <a href="./register.php">
+                <button type="button" class="btn btn-danger btn-lg">Voltar</button>
         </form>
     </div>
 

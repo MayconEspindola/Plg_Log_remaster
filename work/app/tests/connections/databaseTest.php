@@ -4,27 +4,32 @@ use app\config\database;
 use MongoDB\BSON\Regex;
 use PHPUnit\Framework\TestCase;
 
-class DatabaseTest extends TestCase {
+class DatabaseTest extends TestCase
+{
 
-    public function testIfThereIsAConnection() {
+    public function testIfThereIsAConnection()
+    {
         $conn = Database::getConnection();
         $this->assertInstanceOf(\MongoDB\Database::class, $conn);
     }
 
-    public function testIfThereIsAResultNotNull() {
+    public function testIfThereIsAResultNotNull()
+    {
         $collectionName = 'DatabaseTest';
         $result = Database::getResultFromQuery($collectionName);
         $this->assertInstanceOf(\MongoDB\Driver\Cursor::class, $result);
     }
 
-    public function testInsertDocument() {
+    public function testInsertDocument()
+    {
         $collectionName = 'DatabaseTest';
         $document = ['Test' => 'abc123OI321cba'];
         $result = Database::insertDocument($collectionName, $document);
         $this->assertTrue($result);
     }
 
-    public function testDeleteDocument() {
+    public function testDeleteDocument()
+    {
         $collectionName = 'DatabaseTest';
         $filter = ['Test' => 'abc123OI321cba'];
         Database::insertDocument($collectionName, $filter); // Insert a document for testing deletion
@@ -32,7 +37,8 @@ class DatabaseTest extends TestCase {
         $this->assertTrue($result);
     }
 
-    public function testUpdateDocument() {
+    public function testUpdateDocument()
+    {
         $collectionName = 'DatabaseTest';
         $filter = ['Test' => 'abc123OI321cba'];
         $update = ['$set' => ['Test' => 'new_abc123OI321cba']];
