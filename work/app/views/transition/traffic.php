@@ -1,7 +1,9 @@
 <?php
 include_once("../../composition/header.php");
 ?>
+
 <link rel="stylesheet" href="/styles/paginas/traffic.css">
+
 <article id="selectionTraffic">
     <div>
         <div class="d-grid">
@@ -15,7 +17,7 @@ include_once("../../composition/header.php");
 
 
 <div class="page container-sm" id='entrySection' style="display: none;">
-<div class="formulario">
+<!-- <div class="formulario"> -->
     <form method="POST" class="formCadastro" action="/controllers/classSupplier.php">
         <h1>Cadastro Nota Fiscal</h1>
         <!-- Nota Fiscal -->
@@ -53,9 +55,9 @@ include_once("../../composition/header.php");
             <label for="inputCEP"></label>
  
         
-            <input type="submit" value="Proximo" class="btn4 btn-danger btn-lg" id="cadastro" />
+            <input type="submit" value="Proximo" class="btn btn-danger btn-lg" id="cadastro" />
     </form>
-    </div>    
+    <!-- </div>     -->
 </div>
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
