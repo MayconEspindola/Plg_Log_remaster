@@ -6,7 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     cadastrarProduto();
 }
 
-function cadastrarProduto() {
+function cadastrarProduto()
+{
     try {
         $envSettings = new \work\config\EnvironmentSettings();
         $env = $envSettings->obterConfiguracoes();
@@ -65,21 +66,27 @@ function cadastrarProduto() {
     }
 }
 
-function dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal) {
+function getdados(){
+    
+}
+function dadosValidos($codigo, $modelo, $altura, $largura, $comprimento, $peso, $quantidade, $valorUnitario, $valorTotal)
+{
     // Adicione validações conforme necessário
     return !empty($codigo) && !empty($modelo) && !empty($altura) && !empty($largura)
         && !empty($comprimento) && !empty($peso) && !empty($quantidade)
         && !empty($valorUnitario) && !empty($valorTotal);
 }
 
-function codigoDuplicado($collection, $notaFiscal, $codigo) {
+function codigoDuplicado($collection, $notaFiscal, $codigo)
+{
     $filtro = ['notaFiscal' => $notaFiscal, 'produtos.codigo' => $codigo];
     $resultado = $collection->findOne($filtro);
 
     return ($resultado !== null);
 }
 
-function redirecionar($url) {
+function redirecionar($url)
+{
     header("Location: $url");
     exit();
 }

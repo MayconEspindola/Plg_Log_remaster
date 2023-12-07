@@ -13,23 +13,20 @@ if (!isset($_SESSION["username"])) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PJL LOG</title>
     <link rel="icon" type="image/x-icon" href="/images/PLG-log.png">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
-    
-        <link rel="stylesheet" href="/styles/taffic/invoice.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <script> src="/handlers/invoice.js" </script>
+
+    <script> src = "/handlers/invoice.js" </script>
     <script src="/handlers/path.js"></script>
     <script src="/handlers/InactivityCheckerjs"></script>
     <script>
@@ -60,7 +57,8 @@ if (!isset($_SESSION["username"])) {
                 <a class="nav-link" onclick="showInputFields()">
                     Gerar Relatório
                 </a>
-                <form id="reportForm" action="/report/generate_report.php" method="post" onsubmit="return confirmInput()" style="display: none;">
+                <form id="reportForm" action="/report/generate_report.php" method="post"
+                    onsubmit="return confirmInput()" style="display: none;">
                     <input type="text" name="email" placeholder="E-mail" required>
                     <input type="text" name="remetente" placeholder="Remetente" required>
                     <button type="submit">Confirmar</button>

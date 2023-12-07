@@ -73,16 +73,16 @@ class Database
     public static function deleteDocument($collectionName, $filter)
     {
         $database = self::getConnection();
-    
+
         if ($database === null) {
             return false;
         }
-    
+
         $collection = $database->selectCollection($collectionName);
-    
+
         try {
             $result = $collection->deleteOne($filter);
-    
+
             if ($result->getDeletedCount() > 0) {
                 return true;
             } else {
@@ -92,7 +92,7 @@ class Database
             throw new \RuntimeException("Erro ao excluir documento: " . $e->getMessage());
         }
     }
-    
+
 
     public static function updateDocument($collectionName, $filter, $update)
     {

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $collection = $database->selectCollection($collectionName);
 
         $notaFiscal = $_POST["invoice"];
-        
+
         if (notaFiscalDuplicada($collection, $notaFiscal)) {
             redirecionar("/views/transition/traffic.php");
         }
@@ -32,14 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-function notaFiscalDuplicada($collection, $notaFiscal) {
+function notaFiscalDuplicada($collection, $notaFiscal)
+{
     $filtro = ["notaFiscal" => $notaFiscal];
     $resultado = $collection->findOne($filtro);
 
     return ($resultado !== null);
 }
 
-function obterFormData($post) {
+function obterFormData($post)
+{
     return [
         "notaFiscal" => $post["invoice"],
         "dataEmissao" => $post["dataEmissao"],
@@ -52,16 +54,19 @@ function obterFormData($post) {
     ];
 }
 
-function inserirNoBancoDeDados($collection, $formData) {
+function inserirNoBancoDeDados($collection, $formData)
+{
     $result = $collection->insertOne($formData);
 }
 
-function redirecionar($url) {
+function redirecionar($url)
+{
     header("Location: $url");
     exit();
 }
 
-function exibirErro($mensagem) {
+function exibirErro($mensagem)
+{
     echo $mensagem;
 }
 ?>

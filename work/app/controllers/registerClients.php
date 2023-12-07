@@ -52,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     redirecionar('/views/register/registerClient.php');
 }
 
-function redirecionar($url) {
+function redirecionar($url)
+{
     echo "<script>window.location.href='$url';</script>";
     exit();
 }
