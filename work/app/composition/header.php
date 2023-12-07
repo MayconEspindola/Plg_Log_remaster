@@ -23,7 +23,7 @@ if (!isset($_SESSION["username"])) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
 
-    <script> src="/handlers/invoice.js" </script>
+    <script src="/handlers/invoice.js">  </script>
     <script src="/handlers/path.js"></script>
     <script src="/handlers/InactivityCheckerjs"></script>
     <script>

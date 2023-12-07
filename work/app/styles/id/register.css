@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 * {
     margin: 0;
     padding: 0;
@@ -101,7 +101,7 @@ button:hover{
         height: 100%;
     }
 }
-=======
+
 .box_register{
     display: flex;
     flex-direction: column;
@@ -134,5 +134,3 @@ background: #ac0a0a;
 
     
 }
-
->>>>>>> f36f0cd432b14e9491f752a41acc67708a8b607b
