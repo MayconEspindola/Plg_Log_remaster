@@ -75,7 +75,7 @@
         <div class="d-grid gap-2 d-md-block text-center d-flex justify-content-center align-items-center">
             <input type="submit" value="Cadastrar" class="btn btn-danger btn-lg" id="cadastro" />
             <input type="button" value="Calcular" onclick="calcPrice()" class="btn btn-danger btn-lg" id="calcular" />
-            <a href="./register.php">
+            <a href="register.php">
                 <button type="button" class="btn btn-danger btn-lg">Voltar</button>
             </div>
     </form>
